@@ -14,13 +14,13 @@ class Category extends CI_Model
 
 	public function getMainCategories()
 	{
-		$query = $this->db->select('id, name')->get_where('categories', array('id' => null));
-		return $query->result;
+		$query = $this->db->select('id, title')->get_where('categories', array('parent_id' => null));
+		return $query->result();
 	}
 
 	public function getChildren($parentID)
 	{
-		$query = $this->db->select('id, name')->get_where('categories', array('parent_id' => $parentID));
-		return $query->result;
+		$query = $this->db->select('id, title')->get_where('categories', array('parent_id' => $parentID));
+		return $query->result();
 	}
 }

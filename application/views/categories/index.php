@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +8,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<style type="text/css">
 
-		::selection { background-color: #E13300; color: white; }
-		::-moz-selection { background-color: #E13300; color: white; }
+		::selection {
+			background-color: #E13300;
+			color: white;
+		}
+
+		::-moz-selection {
+			background-color: #E13300;
+			color: white;
+		}
 
 		body {
 			background-color: #fff;
@@ -71,19 +78,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Categories/SubCategories Assessment</h1>
 
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+		<label>Categories: </label>
+		<select name="main_category" onchange="createChildrenSelectBox(this)">
+			<option>Select...</option>
+			<?php foreach ($mainCategories as $mainCategory) : ?>
+				<option value="<?php echo $mainCategory->id; ?>">
+					<?php echo $mainCategory->title; ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
-
+<script>
+	var base_url = "<?= base_url('') ?>";
+</script>
+<script src="<?php echo base_url("assets/js/jquery.js"); ?>"></script>
+<script src="<?php echo base_url("assets/js/app.js"); ?>"></script>
 </body>
 </html>
