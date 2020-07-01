@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Migration_Add_categories extends CI_Migration {
+class Migration_Add_categories extends CI_Migration
+{
 
 	public function up()
 	{
@@ -22,10 +23,21 @@ class Migration_Add_categories extends CI_Migration {
 		));
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('categories');
+
+		$this->insertData();
 	}
 
 	public function down()
 	{
 		$this->dbforge->drop_table('categories');
+	}
+
+	public function insertData()
+	{
+		$lines = file(APPPATH."migrations/categories.sql");
+		foreach ($lines as $line) {
+			$line = trim($line);
+			$this->db->query($line);
+		}
 	}
 }
